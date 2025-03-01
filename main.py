@@ -7,13 +7,38 @@ from lib.scraper import (
 )
 import json
 import os
+import click
 
 load_dotenv(".env.local")
 
 
-def main():
+@click.group()
+def cli():
+    """Process allowed or disallowed data."""
     print("Hello from mod-llm!")
 
+
+@cli.command()
+def allowed():
+    """Process allowed data."""
+    print("Processing allowed data...")
+    generate_allowed_data()
+    print("\nAll URLs processed successfully!")
+
+
+@cli.command()
+def disallowed():
+    """Process disallowed data."""
+    print("Processing disallowed data...")
+    generate_disallowed_data()
+    print("\nAll URLs processed successfully!")
+
+
+def generate_disallowed_data():
+    print("Disallowed coming soon...")
+
+
+def generate_allowed_data():
     # Create data/allowed directory if it doesn't exist
     os.makedirs("data/allowed", exist_ok=True)
 
@@ -21,7 +46,7 @@ def main():
     with open("allowed_urls.json", "r") as json_file:
         url_data = json.load(json_file)
 
-    print(f"Processing {len(url_data)} URLs from JSON file")
+    print(f"Processing {len(url_data['urls'])} URLs from JSON file")
 
     for entry in url_data["urls"]:
         entry_id = entry["id"]
@@ -58,8 +83,6 @@ def main():
 
         print(f"Saved markdown for ID {formatted_id} to {output_file}")
 
-    print("\nAll URLs processed successfully!")
-
 
 if __name__ == "__main__":
-    main()
+    cli()
