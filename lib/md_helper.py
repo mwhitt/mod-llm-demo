@@ -23,11 +23,6 @@ def combine_markdown_from_urls(original_markdown: str, urls: list[str]) -> str:
             
         except Exception as e:
             print(f"Error fetching content from {url}: {e}")
-            # Add error note to the combined content
-            combined_content += f"\n\n\n## {'=' * 40}\n"
-            combined_content += f"# Failed to retrieve content from {url}\n"
-            combined_content += f"Error: {str(e)}\n"
-            combined_content += f"## {'=' * 40}\n\n"
     
     return combined_content
 
@@ -69,7 +64,7 @@ def clean_markdown(markdown_text: str) -> str:
         # Skip lines with 3 or more consecutive equal signs
         if re.search(r'={3,}', line):
             continue
-        
+
         # Rule 2: For markdown links, keep the text but remove the URL and parentheses
         # This regex finds markdown links [text](http://url) and replaces with just the text
         line = re.sub(r'\[(.*?)\]\(https?://.*?\)', r'\1', line)
