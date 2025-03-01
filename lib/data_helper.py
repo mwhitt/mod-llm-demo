@@ -1,4 +1,6 @@
+from lib.llm import call_llm
 from lib.md_helper import clean_markdown, combine_markdown_from_urls
+from lib.prompts import get_synthetic_prompt
 from lib.scraper import (
     extract_links_from_markdown_content,
     extract_unique_base_urls,
@@ -9,7 +11,12 @@ import os
 
 
 def generate_disallowed_data():
-    print("Disallowed coming soon...")
+    prompt = get_synthetic_prompt(
+        sales_category="How to Swim Better Video",
+        disallowed_category="Non-Fiat Currency",
+    )
+    response = call_llm(prompt)
+    print(response)
 
 
 def generate_allowed_data():

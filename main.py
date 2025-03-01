@@ -12,7 +12,7 @@ def cli():
 
 
 @cli.command()
-def allowed():
+def generate_allowed():
     """Process allowed data."""
     print("Processing allowed data...")
     generate_allowed_data()
@@ -20,7 +20,7 @@ def allowed():
 
 
 @cli.command()
-def disallowed():
+def generate_disallowed():
     """Process disallowed data."""
     print("Processing disallowed data...")
     generate_disallowed_data()
