@@ -18,7 +18,7 @@ app = modal.App(
     "vscode-environment",
     image=modal.Image.from_registry(
         "nvidia/cuda:12.1.0-cudnn8-devel-ubuntu22.04",
-        add_python="3.13",
+        add_python="3.11",
     )
     .apt_install("openssh-server", "wget", "git")
     .pip_install("torch", "matplotlib", "bitsandbytes", "transformers", "datasets")
