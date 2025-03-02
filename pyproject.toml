@@ -12,4 +12,9 @@ dependencies = [
     "braintrust>=0.0.185",
     "autoevals>=0.0.121",
     "ipykernel>=6.29.5",
+    "modal>=0.73.78",
+    "sshtunnel>=0.4.0",
+    "datasets>=3.3.2",
+    "matplotlib>=3.10.1",
+    "transformers>=4.49.0",
 ]
