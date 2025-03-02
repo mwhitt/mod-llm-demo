@@ -26,9 +26,9 @@ def generate_disallowed_data(root_dir: str = "train"):
         category = entry["category"]
 
         # Skip entries with ID less than or equal to last run
-        # if entry_id <= 12:
-        #     print(f"Skipping entry with ID {entry_id}")
-        #     continue
+        if entry_id <= 8:
+            print(f"Skipping entry with ID {entry_id}")
+            continue
 
         # Format the ID to be 4 characters (with zero padding)
         formatted_id = str(entry_id).zfill(4)

@@ -77,7 +77,7 @@ Please follow these guidelines:
 2. **Content Requirements:**
     - The content should include slang, cryptic messages, innuendos, and coded language that subtly reference {disallowed_category}.
     - Incorporate elements that might also touch on the following {disallowed_category} description:
-        - {disallowed_category_discription(disallowed_category)}
+        {disallowed_category_discription(disallowed_category)}
     - Ensure that while the overt topic is a {sales_category}, the hidden message promotes {disallowed_category} in a veiled manner.
     - Do not include any links or URLs in the markdown content.
 
@@ -102,13 +102,49 @@ Remember, the intent is to create diverse examples of synthetic disallowed conte
 
 def disallowed_category_discription(category: str) -> str:
     return {
-        "Harassment": "Content that attacks or uses discriminatory language",
-        "Adult Content": "Adult content unacceptable to payment processors and banks",
-        "Spam": "Content that is unsolicited, repetitive, or designed to artificially manipulate engagement",
-        "Non-Fiat Currency": "Content about cryptocurrencies, tokens, and other forms of non-traditional currency",
-        "Weapon Components": "Content involving weapons, weapon components, and potentially dangerous materials, including both real and virtual contexts",
-        "Government Services": "Content about government services, official procedures, and related informational materials",
-        "Gambling": "Content related to gambling, games of chance, betting activities, and associated information",
-        "IPTV": "Content related to Internet Protocol Television (IPTV), streaming services, and associated technologies",
-        "Phishing": "Content attempting to fraudulently obtain sensitive information",
+        "Harassment": """
+• Content that attacks, demeans, or uses discriminatory language toward individuals or groups
+• Content that promotes hatred based on protected characteristics
+• Content that encourages bullying or targeted harassment
+   """,
+        "Adult Content": """
+• Sexually explicit material or content intended for adult audiences
+• Content that would violate payment processor or banking regulations
+• Content that sexualizes minors in any way
+   """,
+        "Spam": """
+• Content that is unsolicited, repetitive, or lacks substantial value
+• Content designed to artificially inflate engagement metrics
+• Misleading titles, descriptions, or tags that misrepresent the actual content
+""",
+        "Non-Fiat Currency": """
+• Content related to cryptocurrencies, tokens, or non-fiat currencies
+• Content promoting cryptocurrency mining, trading, or investment
+• NFTs or blockchain-based assets
+""",
+        "Weapon Components": """
+• Content involving real or virtual weapons, weapon components, or accessories
+• Content containing instructions for creating weapons or dangerous materials
+• Content promoting violence or illegal activities
+""",
+        "Government Services": """
+• Unauthorized content about official government procedures or documents
+• Content that mimics official government communications
+• Content that offers assistance with government processes without proper authorization
+""",
+        "Gambling": """
+• Content related to games of chance, betting, or wagering
+• Content promoting gambling activities or services
+• Content offering gambling strategies or systems
+""",
+        "IPTV": """
+• Content related to unauthorized streaming services
+• Content facilitating access to copyrighted material without permission
+• Content circumventing digital rights management systems
+""",
+        "Phishing": """
+• Content attempting to fraudulently obtain sensitive information
+• Content that impersonates trusted entities to deceive users
+• Content containing malware, viruses, or other harmful code
+""",
     }[category]

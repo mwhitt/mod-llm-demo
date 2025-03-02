@@ -16,7 +16,7 @@ def cli():
 def generate_allowed():
     """Process allowed data."""
     print("Processing allowed data...")
-    generate_allowed_data(root_dir="train")
+    generate_allowed_data(root_dir="eval")
     print("\nAll URLs processed successfully!")
 
 
@@ -24,7 +24,7 @@ def generate_allowed():
 def generate_disallowed():
     """Process disallowed data."""
     print("Processing disallowed data...")
-    generate_disallowed_data(root_dir="train")
+    generate_disallowed_data(root_dir="eval")
     print("\nAll URLs processed successfully!")
 
 
