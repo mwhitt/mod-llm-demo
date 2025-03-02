@@ -10,12 +10,12 @@ import json
 import os
 
 
-def generate_disallowed_data():
+def generate_disallowed_data(root_dir: str = "train"):
     # Create data/disallowed directory if it doesn't exist
-    os.makedirs("data/disallowed", exist_ok=True)
+    os.makedirs(f"{root_dir}/disallowed", exist_ok=True)
 
     # Read the disallowed seeds from JSON file
-    with open("disallowed_seeds.json", "r") as json_file:
+    with open(f"{root_dir}/disallowed_seeds.json", "r") as json_file:
         disallowed_seeds = json.load(json_file)
 
     print(f"Processing {len(disallowed_seeds)} entries from disallowed_seeds.json")
@@ -26,9 +26,9 @@ def generate_disallowed_data():
         category = entry["category"]
 
         # Skip entries with ID less than or equal to last run
-        if entry_id <= 12:
-            print(f"Skipping entry with ID {entry_id}")
-            continue
+        # if entry_id <= 12:
+        #     print(f"Skipping entry with ID {entry_id}")
+        #     continue
 
         # Format the ID to be 4 characters (with zero padding)
         formatted_id = str(entry_id).zfill(4)
@@ -44,30 +44,30 @@ def generate_disallowed_data():
         markdown = call_synthetic_llm(prompt)
 
         # Save the response to a file
-        output_file = f"data/disallowed/{formatted_id}.md"
+        output_file = f"{root_dir}/disallowed/{formatted_id}.md"
         with open(output_file, "w", encoding="utf-8") as f:
             f.write(markdown)
 
         print(f"Saved response to {output_file}")
 
 
-def generate_allowed_data():
+def generate_allowed_data(root_dir: str = "train"):
     # Create data/allowed directory if it doesn't exist
-    os.makedirs("data/allowed", exist_ok=True)
+    os.makedirs(f"{root_dir}/allowed", exist_ok=True)
 
     # Read the JSON file with URLs
-    with open("allowed_urls.json", "r") as json_file:
-        url_data = json.load(json_file)
+    with open(f"{root_dir}/allowed_urls.json", "r") as json_file:
+        listtings_data = json.load(json_file)
 
-    print(f"Processing {len(url_data['urls'])} URLs from JSON file")
+    print(f"Processing {len(listtings_data)} URLs from JSON file")
 
-    for entry in url_data["urls"]:
+    for entry in listtings_data:
         entry_id = entry["id"]
         url = entry["url"]
         # Skip entries with ID less than or equal to 50
-        if entry_id <= 50:
-            print(f"Skipping URL with ID {entry_id}")
-            continue
+        # if entry_id <= 87:
+        #     print(f"Skipping URL with ID {entry_id}")
+        #     continue
 
         # Format the ID to be 4 characters (with zero padding)
         formatted_id = str(entry_id).zfill(4)
@@ -90,7 +90,7 @@ def generate_allowed_data():
         cleaned_markdown = clean_markdown(combined_markdown)
 
         # Save the cleaned markdown to a file with the formatted ID
-        output_file = f"data/allowed/{formatted_id}.md"
+        output_file = f"{root_dir}/allowed/{formatted_id}.md"
         with open(output_file, "w", encoding="utf-8") as f:
             f.write(cleaned_markdown)
 
