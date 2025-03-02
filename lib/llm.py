@@ -1,6 +1,6 @@
 import os
 import anthropic
-from typing import Dict, Any, Optional
+from typing import Optional
 
 
 def call_llm(
@@ -8,7 +8,7 @@ def call_llm(
     model: str = "claude-3-7-sonnet-20250219",
     max_tokens: int = 20000,
     system_prompt: Optional[str] = None,
-) -> Dict[str, Any]:
+) -> str:
     """
     Call the Anthropic Claude LLM with the given prompt.
 
@@ -44,5 +44,9 @@ def call_llm(
 
     # Call the LLM
     response = client.messages.create(**message_params)
+    text_content = ""
+    for content_block in response.content:
+        if content_block.type == "text":
+            text_content += content_block.text
 
-    return response
+    return text_content.replace("```", "").strip()

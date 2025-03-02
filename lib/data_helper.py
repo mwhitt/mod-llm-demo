@@ -11,12 +11,44 @@ import os
 
 
 def generate_disallowed_data():
-    prompt = get_synthetic_prompt(
-        sales_category="How to Swim Better Video",
-        disallowed_category="Non-Fiat Currency",
-    )
-    response = call_llm(prompt)
-    print(response)
+    # Create data/disallowed directory if it doesn't exist
+    os.makedirs("data/disallowed", exist_ok=True)
+
+    # Read the disallowed seeds from JSON file
+    with open("disallowed_seeds.json", "r") as json_file:
+        disallowed_seeds = json.load(json_file)
+
+    print(f"Processing {len(disallowed_seeds)} entries from disallowed_seeds.json")
+
+    for entry in disallowed_seeds:
+        entry_id = entry["id"]
+        content = entry["content"]
+        category = entry["category"]
+
+        # Skip entries with ID less than or equal to last run
+        if entry_id <= 12:
+            print(f"Skipping entry with ID {entry_id}")
+            continue
+
+        # Format the ID to be 4 characters (with zero padding)
+        formatted_id = str(entry_id).zfill(4)
+
+        print(f"\nProcessing entry {formatted_id}: {content} (Category: {category})")
+
+        # Generate content using the LLM with the entry's content and category
+        prompt = get_synthetic_prompt(
+            sales_category=content,
+            disallowed_category=category,
+        )
+
+        markdown = call_llm(prompt)
+
+        # Save the response to a file
+        output_file = f"data/disallowed/{formatted_id}.md"
+        with open(output_file, "w", encoding="utf-8") as f:
+            f.write(markdown)
+
+        print(f"Saved response to {output_file}")
 
 
 def generate_allowed_data():
