@@ -18,7 +18,10 @@ def call_baseline_llm(prompt: str) -> str:
 
     response = httpx.post(url, headers=headers, json=payload)
     response_json = response.json()
-    return response_json["choices"][0]["text"]
+    text_content = ""
+    for content_block in response_json["choices"]:
+        text_content += content_block["text"]
+    return text_content
 
 
 def call_synthetic_llm(
