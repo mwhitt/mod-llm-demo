@@ -1,9 +1,27 @@
 import os
 import anthropic
 from typing import Optional
+import httpx
 
 
-def call_llm(
+def call_baseline_llm(prompt: str) -> str:
+    url = "https://api.fireworks.ai/inference/v1/completions"
+    payload = {
+        "model": "accounts/fireworks/models/llama-v3p3-70b-instruct",
+        "prompt": prompt,
+    }
+    headers = {
+        "Accept": "application/json",
+        "Content-Type": "application/json",
+        "Authorization": f"Bearer {os.environ.get('FIREWORKS_API_KEY')}",
+    }
+
+    response = httpx.post(url, headers=headers, json=payload)
+    response_json = response.json()
+    return response_json["choices"][0]["text"]
+
+
+def call_synthetic_llm(
     prompt: str,
     model: str = "claude-3-7-sonnet-20250219",
     max_tokens: int = 20000,

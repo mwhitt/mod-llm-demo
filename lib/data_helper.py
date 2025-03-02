@@ -1,4 +1,4 @@
-from lib.llm import call_llm
+from lib.llm import call_synthetic_llm
 from lib.md_helper import clean_markdown, combine_markdown_from_urls
 from lib.prompts import get_synthetic_prompt
 from lib.scraper import (
@@ -41,7 +41,7 @@ def generate_disallowed_data():
             disallowed_category=category,
         )
 
-        markdown = call_llm(prompt)
+        markdown = call_synthetic_llm(prompt)
 
         # Save the response to a file
         output_file = f"data/disallowed/{formatted_id}.md"

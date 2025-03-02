@@ -1,6 +1,7 @@
+import click
 from dotenv import load_dotenv
 from lib.data_helper import generate_allowed_data, generate_disallowed_data
-import click
+from lib.llm import call_baseline_llm
 
 load_dotenv(".env.local")
 
@@ -25,6 +26,15 @@ def generate_disallowed():
     print("Processing disallowed data...")
     generate_disallowed_data()
     print("\nAll URLs processed successfully!")
+
+
+@cli.command()
+def run_eval():
+    """Run model evaluation."""
+    print("Running model evaluation...")
+    response = call_baseline_llm("Hello, how are you?")
+    print(response)
+    print("\nModel evaluation completed!")
 
 
 if __name__ == "__main__":
