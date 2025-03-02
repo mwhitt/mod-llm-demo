@@ -11,4 +11,5 @@ dependencies = [
     "anthropic>=0.49.0",
     "braintrust>=0.0.185",
     "autoevals>=0.0.121",
+    "ipykernel>=6.29.5",
 ]
