@@ -5,10 +5,10 @@ import httpx
 
 
 def call_baseline_llm(prompt: str) -> str:
-    url = "https://api.fireworks.ai/inference/v1/completions"
+    url = "https://api.fireworks.ai/inference/v1/chat/completions"
     payload = {
         "model": "accounts/fireworks/models/llama-v3p3-70b-instruct",
-        "prompt": prompt,
+        "messages": [{"role": "user", "content": prompt}],
     }
     headers = {
         "Accept": "application/json",
@@ -19,9 +19,16 @@ def call_baseline_llm(prompt: str) -> str:
     response = httpx.post(url, headers=headers, json=payload)
     response_json = response.json()
     text_content = ""
-    for content_block in response_json["choices"]:
-        text_content += content_block["text"]
-    return text_content
+    # Parse the response JSON to extract the message content
+    if "choices" in response_json and len(response_json["choices"]) > 0:
+        # Extract the content from the first choice's message
+        if (
+            "message" in response_json["choices"][0]
+            and "content" in response_json["choices"][0]["message"]
+        ):
+            text_content = response_json["choices"][0]["message"]["content"]
+            return text_content
+    raise Exception("No content found in response")
 
 
 def call_synthetic_llm(
