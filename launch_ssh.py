@@ -21,7 +21,9 @@ app = modal.App(
         add_python="3.11",
     )
     .apt_install("openssh-server", "wget", "git")
-    .pip_install("torch", "matplotlib", "bitsandbytes", "transformers", "datasets")
+    .pip_install(
+        "torch", "matplotlib", "bitsandbytes", "transformers", "datasets", "ipywidgets"
+    )
     .run_commands(
         "mkdir -p /run/sshd",
         "echo 'PermitRootLogin yes' >> /etc/ssh/sshd_config",

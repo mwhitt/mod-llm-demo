@@ -1,3 +1,17 @@
 train_setup:
 	python -m venv .venv
 	. .venv/bin/activate
+
+generate_data:
+	generate_allowed_data
+	generate_disallowed
+
+generate_allowed:
+	uv run python main.py generate-allowed
+
+generate_disallowed:
+	uv run python main.py generate-disallowed
+
+setup:
+	uv venv && uv sync
+
