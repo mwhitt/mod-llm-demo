@@ -58,6 +58,14 @@ This notebook was based on [Unsloth Llama 3.1 8B GRPO](https://colab.research.go
 
 To monitor GPU memory and usage, type `watch -n0.1 nvidia-smi` in the VSCode terminal.
 
+# Inference
+To run the model locally: `make serve`  
+
+Use your model uploaded to Hugging Face on the final cell in the notebook then change the value in the Makefile serve command.
+
+# Evals
+Comming Soon...
+
 # TODO
 
 - [ ] Improve data quality, diversity and add ratings for each category
@@ -65,3 +73,4 @@ To monitor GPU memory and usage, type `watch -n0.1 nvidia-smi` in the VSCode ter
 - [ ] Update rewards system to better reflect moderation goals
 - [ ] Add better observability into training
 - [ ] Once improvements have been made, increase training time to maximize reinforcement learning
+- [ ] Deploy model in test / production environment. 
