@@ -54,7 +54,7 @@ Listings must NOT contain any of the following prohibited content:
 INSTRUCTIONS:
 1. Carefully analyze the content within the <listing-content> tags
 2. Evaluate against each prohibited category
-3. If ANY prohibited content is detected, respond with "DISALLOWED" followed by the specific violation category
+3. If ANY prohibited content is detected, respond with "DISALLOWED"
 4. If NO prohibited content is detected, respond with "ALLOWED"
 
 <listing-content>
