@@ -16,4 +16,4 @@ setup:
 	uv venv && uv sync
 
 serve:
-	export VLLM_CPU_KVCACHE_SPACE=20 uv run vllm serve "mwhitt/mod-llm-demo"
+	export VLLM_CPU_KVCACHE_SPACE=20; uv run vllm serve "mwhitt/mod-llm-demo"

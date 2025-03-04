@@ -1,7 +1,7 @@
 import click
 from dotenv import load_dotenv
 from lib.data_helper import generate_allowed_data, generate_disallowed_data
-from lib.evaluations import start_eval_run
+from lib.evaluations import ModelType, start_eval_run
 
 load_dotenv(".env.local")
 
@@ -32,7 +32,7 @@ def generate_disallowed():
 def run_eval():
     """Run model evaluation."""
     print("Running model evaluation...")
-    start_eval_run()
+    start_eval_run(model_type=ModelType.BASE_MODEL)
     print("\nModel evaluation completed!")
 
 

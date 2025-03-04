@@ -3,6 +3,43 @@ import anthropic
 from typing import Optional
 import httpx
 
+REASONING_SYSTEM_PROMPT = """
+Respond in the following format:
+<reasoning>
+...
+</reasoning>
+<answer>
+...
+</answer>
+"""
+
+
+def call_trained_llm(prompt: str) -> str:
+    url = "https://api.friendli.ai/dedicated/v1/chat/completions"
+    payload = {
+        "model": "lvgzw5lt5d7d",
+        "messages": [
+            {"role": "system", "content": REASONING_SYSTEM_PROMPT},
+            {"role": "user", "content": prompt},
+        ],
+    }
+    headers = {
+        "Content-Type": "application/json",
+        "Authorization": f"Bearer {os.environ.get('FRIENDLI_TOKEN')}",
+    }
+
+    response = httpx.post(url, headers=headers, json=payload)
+    response_json = response.json()
+
+    if "choices" in response_json and len(response_json["choices"]) > 0:
+        if (
+            "message" in response_json["choices"][0]
+            and "content" in response_json["choices"][0]["message"]
+        ):
+            return response_json["choices"][0]["message"]["content"]
+
+    raise Exception("No content found in response")
+
 
 def call_baseline_llm(prompt: str) -> str:
     url = "https://api.fireworks.ai/inference/v1/chat/completions"
