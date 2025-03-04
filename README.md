@@ -30,6 +30,16 @@ Make sure you have uv installed. (https://docs.astral.sh/uv/getting-started/inst
 
 Then call: `make setup`
 
+Local `.env` vars are required to run everything locally:
+```
+JINA_API_KEY=
+ANTHROPIC_API_KEY=
+FIREWORKS_API_KEY=
+BRAINTRUST_API_KEY=
+HUGGING_FACE_WRITE_API_KEY=
+FRIENDLI_TOKEN=
+```
+
 # LLM Training
 
 Make sure you have a [modal](https://modal.com/) account with a credit card on file. This training should stay under the free monthly credit provided by Modal.
@@ -63,8 +73,29 @@ To run the model locally: `make serve`
 
 Use your model uploaded to Hugging Face on the final cell in the notebook then change the value in the Makefile serve command.
 
-# Evals
-Comming Soon...
+# Evaluations
+
+To run evaluations:
+
+1. Configure the model type in `main.py` by modifying the `run_eval` function:
+   ```python
+   # For baseline model (Llama 3.3 70B)
+   start_eval_run(model_type=ModelType.BASE_MODEL)
+   
+   # For fine-tuned model
+   start_eval_run(model_type=ModelType.TRAINED_MODEL)
+   ```
+
+2. Execute the evaluation with: `make eval`
+
+## Results
+
+Initial evaluation results show approximately 3% accuracy improvement with the fine-tuned model. This is promising considering:
+- The training duration was relatively short
+- The baseline model is 70B parameters (Llama 3.3)
+- The fine-tuned model is only 8B parameters
+
+Further training iterations should yield additional improvements.
 
 # TODO
 

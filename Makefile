@@ -17,3 +17,6 @@ setup:
 
 serve:
 	export VLLM_CPU_KVCACHE_SPACE=20; uv run vllm serve "mwhitt/mod-llm-demo"
+
+eval:
+	uv run python main.py run-eval
