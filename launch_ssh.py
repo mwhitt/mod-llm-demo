@@ -22,7 +22,13 @@ app = modal.App(
     )
     .apt_install("openssh-server", "wget", "git")
     .pip_install(
-        "torch", "matplotlib", "bitsandbytes", "transformers", "datasets", "ipywidgets"
+        "torch",
+        "matplotlib",
+        "bitsandbytes",
+        "transformers",
+        "datasets",
+        "ipywidgets",
+        "wandb",
     )
     .run_commands(
         "mkdir -p /run/sshd",

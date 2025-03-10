@@ -1,6 +1,7 @@
 # Custom Moderator LLM
 
 This project was built over a weekend to demonstrate the foundational components needed to post-train an LLM with the latest GRPO reasoning techniques. The LLM focuses on content moderation and flagging content that includes any of the following:
+
 - Harassment
 - Adult content
 - Spam
@@ -13,7 +14,7 @@ This project was built over a weekend to demonstrate the foundational components
 
 The LLM is trained with the goal of improving accuracy and reducing costs.
 
-# Data
+## Data
 
 Currently, the LLM is only tasked with allowing or disallowing content. A future enhancement would be a rating score in each category so that custom rules can be made more easily.
 
@@ -24,14 +25,15 @@ Currently, the LLM is only tasked with allowing or disallowing content. A future
 
 Edit the `generate_allowed_data` or `generate_disallowed_data` function call in `main.py` to change the root directory. Then run: `make generate_data`.
 
-# Development Setup
+## Development Setup
 
-Make sure you have uv installed. (https://docs.astral.sh/uv/getting-started/installation/)
+Make sure you have uv installed. (<https://docs.astral.sh/uv/getting-started/installation/>)
 
 Then call: `make setup`
 
 Local `.env` vars are required to run everything locally:
-```
+
+```text
 JINA_API_KEY=
 ANTHROPIC_API_KEY=
 FIREWORKS_API_KEY=
@@ -40,7 +42,7 @@ HUGGING_FACE_WRITE_API_KEY=
 FRIENDLI_TOKEN=
 ```
 
-# LLM Training
+## LLM Training
 
 Make sure you have a [modal](https://modal.com/) account with a credit card on file. This training should stay under the free monthly credit provided by Modal.
 
@@ -68,16 +70,18 @@ This notebook was based on [Unsloth Llama 3.1 8B GRPO](https://colab.research.go
 
 To monitor GPU memory and usage, type `watch -n0.1 nvidia-smi` in the VSCode terminal.
 
-# Inference
+## Inference
+
 To run the model locally: `make serve`  
 
 Use your model uploaded to Hugging Face on the final cell in the notebook then change the value in the Makefile serve command.
 
-# Evaluations
+## Evaluations
 
 To run evaluations:
 
 1. Configure the model type in `main.py` by modifying the `run_eval` function:
+
    ```python
    # For baseline model (Llama 3.3 70B)
    start_eval_run(model_type=ModelType.BASE_MODEL)
@@ -88,20 +92,21 @@ To run evaluations:
 
 2. Execute the evaluation with: `make eval`
 
-## Results
+### Results
 
 Initial evaluation results show approximately 3% accuracy improvement with the fine-tuned model. This is promising considering:
+
 - The training duration was relatively short
 - The baseline model is 70B parameters (Llama 3.3)
 - The fine-tuned model is only 8B parameters
 
 Further training iterations should yield additional improvements.
 
-# TODO
+## TODO
 
 - [ ] Improve data quality, diversity and add ratings for each category
 - [ ] Optimize prompts and tuning parameters
 - [ ] Update rewards system to better reflect moderation goals
 - [ ] Add better observability into training
 - [ ] Once improvements have been made, increase training time to maximize reinforcement learning
-- [ ] Deploy model in test / production environment. 
+- [ ] Deploy model in test / production environment.
